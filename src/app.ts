@@ -46,6 +46,22 @@ router.get("/tracking", async (req, res) => {
   res.json(trackingUrls);
 });
 
+router.get("/tracking/:name", async (req, res) => {
+  try {
+    const trackingUrl = await Tracking.findOne({
+      where: { name: req.params.name },
+    });
+
+    if (trackingUrl) {
+      res.status(200).json(trackingUrl);
+    } else {
+      res.status(404).json(`Tracking URL named ${req.params.name} not found.`);
+    }
+  } catch {
+    res.status(400).json({});
+  }
+});
+
 router.post("/tracking/:name", async (req, res) => {
   try {
     const trackingUrl = await Tracking.create({
