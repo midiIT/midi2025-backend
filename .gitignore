@@ -12,5 +12,7 @@ coverage
 # Benchmarking
 benchmarks/graphs
 
+database.sqlite
+
 # ignore additional files using core.excludesFile
 # https://git-scm.com/docs/gitignore
