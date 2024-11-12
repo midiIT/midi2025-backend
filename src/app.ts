@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { DataTypes, Model, Sequelize } from "sequelize";
 import process from "process";
+import cors from "cors";
 
 const app = express();
 const router = express.Router();
@@ -16,6 +17,12 @@ const localhostOnly = (req: Request, res: Response, next: NextFunction) => {
 };
 
 router.use(localhostOnly);
+
+router.use(
+  cors({
+    origin: "http://localhost:3000",
+  }),
+);
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
