@@ -69,9 +69,12 @@ router.put("/tracking/:name", async (req, res) => {
       await trackingUrl.update({ clicks: trackingUrl.toJSON().clicks + 1 });
       res.status(200).json(trackingUrl);
     } else {
-      res
-        .status(404)
-        .json(`Tracking link with name ${req.params.name} not found.`);
+      const trackingUrl = await Tracking.create({
+        name: req.params.name,
+        clicks: 1,
+      });
+
+      res.status(201).json(trackingUrl);
     }
   } catch {
     res.status(400).json({});
