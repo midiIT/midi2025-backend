@@ -4,19 +4,26 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon",
+    "start": "node dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prettier": "prettier --write .",
+    "build": "esbuild src/app.ts --bundle --platform=node --format=esm --outfile=dist/bundle.js --packages=external"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
