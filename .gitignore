@@ -12,6 +12,7 @@ coverage
 # Benchmarking
 benchmarks/graphs
 
+dist/
 database.sqlite
 
 # ignore additional files using core.excludesFile
