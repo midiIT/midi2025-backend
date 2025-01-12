@@ -1,28 +1,32 @@
 import express, { NextFunction, Request, Response } from "express";
 import { DataTypes, Model, Sequelize } from "sequelize";
 import process from "process";
-import cors from "cors";
 
 const app = express();
 const router = express.Router();
 const port = process.env.PORT || 3001;
 
-const localhostOnly = (req: Request, res: Response, next: NextFunction) => {
-  const ip = req.ip;
-  if (ip === "127.0.0.1" || ip === "::1" || ip === "::ffff:127.0.0.1") {
+if (process.env.NODE_ENV == "development") {
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS",
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization",
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+
+    if (req.method === "OPTIONS") {
+      res.status(200).end();
+      return;
+    }
+
     next();
-  } else {
-    res.status(403).json({ error: "Access restricted to localhost" });
-  }
-};
-
-router.use(localhostOnly);
-
-router.use(
-  cors({
-    origin: "http://localhost:3000",
-  }),
-);
+  });
+}
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
