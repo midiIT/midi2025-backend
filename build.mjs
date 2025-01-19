@@ -28,6 +28,7 @@ await writeFile(
   "dist/.env",
   `NODE_ENV=production
 PORT=8000
+WEATHER_API_KEY=81279801d34470e5dbb037fabe491c60
 `,
 );
 

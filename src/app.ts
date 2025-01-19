@@ -3,6 +3,7 @@ import process from "process";
 import dotenv from "dotenv";
 import trackingRouter from "./routes/tracking";
 import volunteerRouter from "./routes/volunteer";
+import weatherRouter from "./routes/weather";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -33,6 +34,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use("/api", trackingRouter);
 app.use("/api", volunteerRouter);
+app.use("/api", weatherRouter);
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);
