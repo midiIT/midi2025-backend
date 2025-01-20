@@ -45,9 +45,4 @@ router.post("/volunteer", async (req, res) => {
   }
 });
 
-router.get("/volunteer", async (req, res) => {
-  const volunteers = await Volunteer.findAll();
-  res.json(volunteers);
-});
-
 export default router;
